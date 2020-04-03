@@ -1,0 +1,51 @@
+{
+    "name": "UserExtra",
+    "fields": [
+        {
+            "fieldName": "actif",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "typeUtilisateur",
+            "fieldType": "TypeUtilisateur",
+            "fieldValues": "ETUDIANT,CLIENT"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "groupe",
+            "otherEntityRelationshipName": "userExtra",
+            "relationshipName": "groupe",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "evaluation",
+            "otherEntityRelationshipName": "userExtra",
+            "relationshipName": "evaluation",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "userExtra",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200403130600",
+    "entityTableName": "user_extra",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

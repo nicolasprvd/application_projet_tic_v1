@@ -1,0 +1,68 @@
+{
+    "name": "Projet",
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descriptionPDF",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "descriptionTexte",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nbEtudiant",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "automatique",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "archive",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "groupe",
+            "otherEntityRelationshipName": "projet",
+            "relationshipName": "groupe",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "projet",
+            "relationshipName": "userExtra",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "projet",
+            "relationshipName": "document"
+        }
+    ],
+    "changelogDate": "20200403130800",
+    "entityTableName": "projet",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

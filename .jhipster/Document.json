@@ -1,0 +1,41 @@
+{
+    "name": "Document",
+    "fields": [
+        {
+            "fieldName": "doc",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "typeDocument",
+            "fieldType": "TypeDocument",
+            "fieldValues": "CDC,RF,GANTT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "projet",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "projet",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200403130700",
+    "entityTableName": "document",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
