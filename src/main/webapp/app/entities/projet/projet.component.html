@@ -54,8 +54,8 @@
                     <tr *ngIf="!projet.archive || isClient()">
                         <td>{{ projet.nom }}</td>
                         <td>
-                            <a *ngIf="projet.descriptionPDF" (click)="openFile(projet.descriptionPDFContentType, projet.descriptionPDF)" jhiTranslate="entity.action.open">open</a>
-                            <span *ngIf="projet.descriptionPDF">{{ projet.descriptionPDFContentType }}, {{ byteSize(projet.descriptionPDF) }}</span>
+                            <a id="ouvrirpdf" *ngIf="projet.descriptionPDF" (click)="openFile(projet.descriptionPDFContentType, projet.descriptionPDF)" jhiTranslate="entity.action.open">open</a>
+                            <span *ngIf="projet.descriptionPDF">{{ byteSize(projet.descriptionPDF) }}</span>
                         </td>
                         <td>{{ projet.descriptionTexte }}</td>
                         <td>{{ projet.nbEtudiant }}</td>

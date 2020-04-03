@@ -17,7 +17,8 @@ import { TypeUtilisateur } from 'app/shared/model/enumerations/type-utilisateur.
 
 @Component({
   selector: 'jhi-projet',
-  templateUrl: './projet.component.html'
+  templateUrl: './projet.component.html',
+  styleUrls: ['./projet.scss']
 })
 export class ProjetComponent implements OnInit, OnDestroy {
   account!: Account | null;
