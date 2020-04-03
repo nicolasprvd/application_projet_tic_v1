@@ -17,6 +17,9 @@
       "detail": {
         "title": "Projet"
       },
+      "bouton": {
+        "choisir": "Postuler"
+      },
       "nom": "Nom",
       "descriptionPDF": "Description PDF",
       "descriptionTexte": "Description Texte",

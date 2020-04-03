@@ -1,19 +1,28 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IProjet } from 'app/shared/model/projet.model';
 import { ProjetService } from './projet.service';
 import { ProjetDeleteDialogComponent } from './projet-delete-dialog.component';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
+import { UserService } from 'app/core/user/user.service';
+import { UserExtraService } from 'app/entities/user-extra/user-extra.service';
+import { User } from 'app/core/user/user.model';
+import { TypeUtilisateur } from 'app/shared/model/enumerations/type-utilisateur.model';
 
 @Component({
   selector: 'jhi-projet',
   templateUrl: './projet.component.html'
 })
 export class ProjetComponent implements OnInit, OnDestroy {
+  account!: Account | null;
+  user!: User;
+  typeUtilisateur?: TypeUtilisateur;
   projets?: IProjet[];
   eventSubscriber?: Subscription;
   currentSearch: string;
@@ -23,7 +32,10 @@ export class ProjetComponent implements OnInit, OnDestroy {
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
+    private userService: UserService,
+    private userExtraService: UserExtraService
   ) {
     this.currentSearch =
       this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
@@ -52,6 +64,15 @@ export class ProjetComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadAll();
     this.registerChangeInProjets();
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+    this.userService.find(this.account?.login as string).subscribe(user => {
+      this.user = user;
+      this.userExtraService.find(this.user.id).subscribe(userExtra => {
+        this.typeUtilisateur = userExtra.body?.typeUtilisateur;
+      });
+    });
   }
 
   ngOnDestroy(): void {
@@ -81,4 +102,11 @@ export class ProjetComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ProjetDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.projet = projet;
   }
+
+  isClient(): boolean {
+    console.error(this.typeUtilisateur);
+    return this.typeUtilisateur === TypeUtilisateur.CLIENT;
+  }
+
+  postuler(): void {}
 }
