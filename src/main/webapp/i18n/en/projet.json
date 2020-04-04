@@ -21,8 +21,8 @@
         "choisir": "Apply"
       },
       "nom": "Project's name",
-      "descriptionPDF": "PDF Description",
-      "descriptionTexte": "Textual Description",
+      "descriptionPDF": "PDF description",
+      "descriptionTexte": "Textual description",
       "nbEtudiant": "Team size",
       "automatique": "Automatic",
       "archive": "Archive",
