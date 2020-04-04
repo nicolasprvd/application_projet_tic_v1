@@ -20,7 +20,7 @@
       "bouton": {
         "choisir": "Postuler"
       },
-      "nom": "Nom",
+      "nom": "Nom du projet",
       "descriptionPDF": "Description PDF",
       "descriptionTexte": "Description Texte",
       "nbEtudiant": "Nb Etudiant",
@@ -28,7 +28,9 @@
       "archive": "Archive",
       "groupe": "Groupe",
       "userExtra": "User Extra",
-      "document": "Document"
+      "document": "Document",
+      "client": "Client",
+      "email": "Email"
     }
   }
 }

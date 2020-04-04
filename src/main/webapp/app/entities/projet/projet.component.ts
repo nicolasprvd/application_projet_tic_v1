@@ -12,7 +12,6 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { UserService } from 'app/core/user/user.service';
 import { UserExtraService } from 'app/entities/user-extra/user-extra.service';
-import { User } from 'app/core/user/user.model';
 import { TypeUtilisateur } from 'app/shared/model/enumerations/type-utilisateur.model';
 
 @Component({
@@ -22,7 +21,6 @@ import { TypeUtilisateur } from 'app/shared/model/enumerations/type-utilisateur.
 })
 export class ProjetComponent implements OnInit, OnDestroy {
   account!: Account | null;
-  user!: User;
   typeUtilisateur?: TypeUtilisateur;
   projets?: IProjet[];
   eventSubscriber?: Subscription;
@@ -68,11 +66,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
     });
-    this.userService.find(this.account?.login as string).subscribe(user => {
-      this.user = user;
-      this.userExtraService.find(this.user.id).subscribe(userExtra => {
-        this.typeUtilisateur = userExtra.body?.typeUtilisateur;
-      });
+    this.userExtraService.find(this.account!.id).subscribe(userExtra => {
+      this.typeUtilisateur = userExtra.body?.typeUtilisateur;
     });
   }
 
@@ -105,7 +100,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
   }
 
   isClient(): boolean {
-    console.error(this.typeUtilisateur);
     return this.typeUtilisateur === TypeUtilisateur.CLIENT;
   }
 

@@ -20,7 +20,7 @@
       "bouton": {
         "choisir": "Apply"
       },
-      "nom": "Name",
+      "nom": "Project's name",
       "descriptionPDF": "PDF Description",
       "descriptionTexte": "Textual Description",
       "nbEtudiant": "Team size",
@@ -28,7 +28,9 @@
       "archive": "Archive",
       "groupe": "Group",
       "userExtra": "User Extra",
-      "document": "Document"
+      "document": "Document",
+      "client": "Customer",
+      "email": "Email"
     }
   }
 }
