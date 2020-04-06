@@ -13,6 +13,7 @@ import { Account } from 'app/core/user/account.model';
 import { UserService } from 'app/core/user/user.service';
 import { UserExtraService } from 'app/entities/user-extra/user-extra.service';
 import { TypeUtilisateur } from 'app/shared/model/enumerations/type-utilisateur.model';
+import { Authority } from 'app/shared/constants/authority.constants';
 
 @Component({
   selector: 'jhi-projet',
@@ -23,8 +24,10 @@ export class ProjetComponent implements OnInit, OnDestroy {
   account!: Account | null;
   typeUtilisateur?: TypeUtilisateur;
   projets?: IProjet[];
+  authorities!: string[] | undefined;
   eventSubscriber?: Subscription;
   currentSearch: string;
+  accountExtraId!: number;
 
   constructor(
     protected projetService: ProjetService,
@@ -65,9 +68,11 @@ export class ProjetComponent implements OnInit, OnDestroy {
     this.registerChangeInProjets();
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
+      this.authorities = account?.authorities;
     });
     this.userExtraService.find(this.account!.id).subscribe(userExtra => {
       this.typeUtilisateur = userExtra.body?.typeUtilisateur;
+      this.accountExtraId = userExtra.body?.id!;
     });
   }
 
@@ -104,4 +109,16 @@ export class ProjetComponent implements OnInit, OnDestroy {
   }
 
   postuler(): void {}
+
+  isAutorise(projet: IProjet): boolean {
+    for (const droit of this.authorities!) {
+      if (Authority.ADMIN === droit) {
+        return true;
+      }
+    }
+    if (this.isClient()) {
+      return projet.userExtraId === this.accountExtraId;
+    }
+    return false;
+  }
 }

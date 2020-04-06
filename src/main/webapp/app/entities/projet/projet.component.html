@@ -76,14 +76,14 @@
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                                 </button>
 
-                                <button *ngIf="isClient()" type="submit"
+                                <button *ngIf="isAutorise(projet)" type="submit"
                                         [routerLink]="['/projet', projet.id, 'edit']"
                                         class="btn btn-primary btn-sm">
                                     <fa-icon icon="pencil-alt"></fa-icon>
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                 </button>
 
-                                <button *ngIf="isClient()" type="submit" (click)="delete(projet)"
+                                <button *ngIf="isAutorise(projet)" type="submit" (click)="delete(projet)"
                                         class="btn btn-danger btn-sm">
                                     <fa-icon icon="times"></fa-icon>
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
